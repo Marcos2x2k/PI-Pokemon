@@ -16,20 +16,20 @@ const { Pokemon, Type } = require('../db.js'); //importo los modelos conectados
 
 const getApiInfo = async () =>{
     try{
-        const PokemonPageOne = (await axios.get("https://pokeapi.co/api/v2/pokemon")).data.results;
-        const InformationOne = PokemonPageOne.map(el => axios.get(el.url));
-        const PokemonPageTwo = (await axios.get("https://pokeapi.co/api/v2/pokemon")).data;
-        const totalPage = await axios.get(PokemonPageTwo.next);
-        const nextPage = totalPage.data.results;
-        const InformationTwo = nextPage.map(p => axios.get(p.url));
-        let InfoTotal = InformationOne.concat(InformationTwo);        
-        const apiHtml = await Promise.all(InfoTotal);
+        const PokemonUno = (await axios.get("https://pokeapi.co/api/v2/pokemon")).data.results;
+        const InformacionUno = PokemonUno.map(el => axios.get(el.url));
+        const PokemonDos = (await axios.get("https://pokeapi.co/api/v2/pokemon")).data;
+        const PokemonTotal = await axios.get(PokemonDos.next);
+        const ProxPagina = PokemonTotal.data.results;
+        const InformacionDos = ProxPagina.map(p => axios.get(p.url));
+        let infoTotal = InformacionUno.concat(InformacionDos);        
+        const apiHtml = await Promise.all(infoTotal);
         //console.log('INFORMACION TOTAL *********', myObject)
             const apiInfo = apiHtml.map(p => {
                 return {                    
                     id: p.data.id,
                     name: p.data.name,
-                    types: p.data.types[0].type.name,
+                    type: p.data.types[0].type.name,
                     hp: p.data.stats[0].base_stat,                  
                     attack: p.data.stats[1].base_stat,
                     defense: p.data.stats[2].base_stat,
@@ -92,20 +92,72 @@ router.get('/pokemons', async (req, res, next) => {
     }
 })
 
-// router.get('/pokemons/:id', async (req, res, next) => {
-//     return {        
-//     }
-// })
+router.get('/pokemons/:id', async (req, res, next) => {
+    const id = req.params.id;
+    var PokemonTotal = await getAllPokemon();
+    if(id){
+        const pokemonId = await PokemonTotal.filter((p) => p.id === id)
+        console.log(pokemonId)
+        pokemonId.length?
+            res.status(200).send(pokemonId) :
+            res.status(400).send(' NO EXISTE EL POKEMON BUSCADO')
+    }
+})
 
-// router.get('/types', async (req, res, next) =>{
-//     return{        
-//     }
-// })
 
-// router.post('/newPokemons', async (req, res, next) => {
-//     return{        
-//     }
-// })
+    router.get('/types', async (req, res) => {
+        var apiHtml = await getAllPokemon();
+        // ** para llamar por type 
+        const type = apiHtml.map(p => p.type)
+        console.log ('TRAIGO TYPE',type )
+        const type1 = await type.filter(p => p.length > 0); // para verificar q no traiga nada vacio    
+        //hago una eliminacion de los repetidos y los ordeno antes de meter a la bd
+        const typenorepeat = [...new Set(type1)].sort();
+        //recorro todo buscando y me traigo los types de la base de datos busca o lo crea si no existe
+        typenorepeat.forEach(p => { 
+            if (p!==undefined) Type.findOrCreate({where:{name:p}})
+        })  
+        const allTypes = await Type.findAll();       
+               
+        res.send(allTypes);
+        });
+
+
+router.post('/newPokemons', async (req, res, next) => {
+    /// ** traigo lo q me pide por Body ** 
+    let{       
+        name,        
+        type,        
+        hp,
+        attack,
+        defense,
+        speed,
+        height,
+        weight,
+        image,
+        createInDb,
+    } = req.body
+
+    let pokemonsCreated = await Pokemon.create({ 
+        name,        
+        type,        
+        hp,
+        attack,
+        defense,
+        speed,
+        height,
+        weight,
+        image,
+        createInDb,
+    })
+
+    let typesDb = await Type.findAll({
+        where: { name: type }
+    })
+    pokemonsCreated.addTypes(typesDb)
+    res.send('Nuevo Pokemon Creado')
+    
+})
 
 
 
