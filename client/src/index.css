@@ -1,4 +1,7 @@
 body {
+  background-image: url('https://www.teahub.io/photos/full/41-410188_fondos-de-pantalla-hd-pokemon.jpg');  
+  background-repeat: no-repeat;
+  background-attachment: fixed;   
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
