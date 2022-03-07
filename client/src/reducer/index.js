@@ -36,21 +36,21 @@ export default function rootReducer(state =  initialState, action){ //action.pay
                 hps: action.payload
             } 
         case 'FILTER_POKEMONS_BY_TYPES':
-            // const allStatePokemons = state.pokemons
-            // const tempPokemons = allStatePokemons.filter(p => {
-            //     if(p.type){ // info viene como [{name:..},{name:..},{name:..}]
-            //         const types = p.type.map( p => p.name)
-            //         return types.includes(action.payload)}
-            //     if (p.type) { //info viene como string
-            //         return p.type.includes(action.payload)
-            //     }
-            //     // return null
-            // })           
-            // return {
-            //     ...state,
-            //     pokemons: action.payload === 'sinFiltro' ? allStatePokemons : tempPokemons,
-            //     // ? es entonces// : es sino // es un ternario
-            // }
+            const allStatePokemons = state.pokemons
+            const tempPokemons = allStatePokemons.filter(p => {
+                if(p.type){ // info viene como [{name:..},{name:..},{name:..}]
+                    const types = p.type.map( p => p.name)
+                    return types.includes(action.payload)}
+                if (p.type) { //info viene como string
+                    return p.type.includes(action.payload)
+                }
+                // return null
+            })           
+            return {
+                ...state,
+                pokemons: action.payload === 'sinFiltro' ? allStatePokemons : tempPokemons,
+                // ? es entonces// : es sino // es un ternario
+            }
         case 'POST_POKEMONS'://No se declara en actions, se declara en el reducer. 
                           //en action solo se trae la ruta
                  return{

@@ -110,15 +110,14 @@ router.get('/pokemons/:id', async (req, res, next) => {
         // ** para llamar por type 
         const type = apiHtml.map(p => p.type)
         console.log ('TRAIGO TYPE',type )
-        const typeTotal = await type.filter(p => p.length > 0); // para verificar q no traiga nada vacio    
-        //hago una eliminacion de los repetidos y los ordeno antes de meter a la bd
-        const typenorepeat = [...new Set(typeTotal)].sort();
-        //recorro todo buscando y me traigo los types de la base de datos busca o lo crea si no existe
-        typenorepeat.forEach(p => { 
-            if (p!==undefined) Type.findOrCreate({where:{name:p}})
-        })  
-        const allTypes = await Type.findAll();       
-               
+        // const typeTotal = await type.filter(p => p.length > 0); // para verificar q no traiga nada vacio    
+        // //hago una eliminacion de los repetidos y los ordeno antes de meter a la bd
+        // const typenorepeat = [...new Set(typeTotal)].sort();
+        // // // recorro todo buscando y me traigo los types de la base de datos busca o lo crea si no existe
+        // typenorepeat.forEach(p => { 
+        //     if (p!==undefined) Type.findOrCreate({where:{name:p}})
+        // })  //SAQUER ESTO PORQUE SEGUN YO NO ES UN ARRAY ASI QUE NO HACE FALTA 
+        const allTypes = await Type.findAll();              
         res.send(allTypes);
         });
 

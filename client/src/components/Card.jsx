@@ -13,12 +13,13 @@ export default function Card({name, image, type, types}){
     // } 
     // if (genre){
     return (
+
+    
         <div>   
             <h2 class="heading">{name}</h2>                        
             <img  className="card" src={image} alt="img not found" width = "400px" height="270px"/>
-            <h5 class="headingRojo">TIPOS: {types
-                        ? types.map((p) => p.name + ", ")
-                        : type.map((p) => p.name + ", ")}</h5>
+            <h5 class="headingRojo">TIPO: {type}</h5>
+            {/* <h5 class="headingRojo">TIPOS: {types}</h5> */}
             {/* <h5 class="headingRojo">PLATAFORMAS: {platforms
                         ? platforms.map((p) => p.name + ", ")
                         : platform.map((p) => p.name + ", ")}</h5> */}

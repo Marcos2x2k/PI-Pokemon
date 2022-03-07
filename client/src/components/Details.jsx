@@ -37,16 +37,17 @@ function Details(){
                     <h3 class="heading">DEFENSA: {allDetails[0].defense
                         ? allDetails[0].defense
                         : "NO POSEE DESCRIPCION"}</h3>
-                    <h3 class="heading">TIPOS: {allDetails[0].types
-                        ? allDetails[0].types.map((p) => p.name + ", ")
-                        : allDetails[0].types.map((p) => p.name + ", ")}</h3> 
+                    <h3 class="heading">TIPOS: {allDetails[0].types}</h3> 
+                    <h3 class="heading"> VELOCIDAD: {allDetails[0].speed}</h3> 
 
-                    <h3 class="heading">VELOCIDAD: {Array.isArray(allDetails[0].speed)
+                    {/* ? allDetails[0].types.map((p) => p.name + ", ")
+                        : allDetails[0].types.map((p) => p.name + ", ") */}
+                    {/* <h3 class="heading">VELOCIDAD: {Array.isArray(allDetails[0].speed)
                         ? allDetails[0].speed.map((p) =>p.speed.name + ", LADRON ")
-                        : "Pc"}                       
+                        : "Pc"}                        */}
                                              {/* // "Action"} */}
                         {/* allDetails[0].platform.map((p) => p.name + ", ROBO ")                  */}
-                    </h3>
+                    
                     {/* <h3 class="heading">PLATAFORMAS: {allDetails[0].platforms
                         ? allDetails[0].platform.map((p) => p + ", ")
                         : allDetails[0].platforms.map((p) => p + ", ")}</h3>  */}

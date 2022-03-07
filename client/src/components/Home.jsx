@@ -1,12 +1,11 @@
 import React from 'react';
-//import Button from '@material-ui/core/Button'; // importo estilo de boton
 import './styles/Home.css'; // importo los styles de mi Home.css
 // import SearchBar from './SearchBar';
 
 //IMPORTO PORQUE USAMOS HOOKS
 import {useState, useEffect, Fragment} from 'react'; //  HOOK USAMOS useState es un hook (//)Fragment es como un div para envolver hijos div en app)
 import {useDispatch, useSelector} from 'react-redux'; 
-import {getPokemons, getListTypes, filterPokemonsByType, filterCreated, orderByName, getTypes, getHps, setPage} from '../actions';//Siempre importo las acciones nuevas 
+import {getPokemons, getListTypes, filterPokemonsByType, filterCreated, orderByName, getHps, setPage} from '../actions';//Siempre importo las acciones nuevas 
 
 //LINK nos sirve para poder movernos por nuestra aplicación
 //más fácilmente en lugar de tener que cambiar la URL manualmente en el navegador.
@@ -33,7 +32,7 @@ export default function Home (){
     // creo una constante de los Games en la pagina actual y me traigo el array del estado de los Games 
     const currentPokemons =  allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon)
 
-    const Types = useSelector((state) => state.types); //estado global de Typos
+    const types = useSelector((state) => state.types); //estado global de Typos
     const hps = useSelector((state) => state.hps); //estado global de Fuerzas
     
 
@@ -91,7 +90,7 @@ export default function Home (){
     <div>        
         <div>             
             <div className="padre">
-                <h1 className="colorLetrasBienvenido">** Bienvenidos a mi App de Juegos **</h1>
+                <h1 className="colorLetrasBienvenido">** Bienvenidos a mi App de Pokemon **</h1>
             </div>
         <div>
             {/* <Button  variant="contained" color="primary" onClick={p => {handleClick(p)}}>
@@ -106,7 +105,7 @@ export default function Home (){
             <Link to= '/'><button className="selectfont">IR A PAGINA DE LANZAMIENTO</button></Link> 
             {/* <Link to= '/home'><button className="selectfont">VOLVER A CARGAR JUEGOS</button></Link>  */}
             <button className="selectfont" onClick={p => {handleClick(p)}}>VOLVER A CARGAR POKEMON</button>
-            <Link to= '/newPokemons'><button className="selectfont">CREAR Nuevo Pokemon</button></Link>                    
+            <Link to= '/newPokemons'><button className="selectfont">CREAR NUEVO POKEMON</button></Link>                    
         </div>            
             
             <br />
@@ -122,7 +121,7 @@ export default function Home (){
             </select>            
                        
             <select className="selectfont" onChange={p => handleFilterCreated(p)}>                
-                <option value="" selected disabled hidden>Mostrar Juegos</option>
+                <option value="" selected disabled hidden>Mostrar Pokemons</option>
                 <option value="all">Todos Los Pokemon</option>
                 <option value="api">De la API</option>
                 <option value="created">Creados</option>
@@ -136,7 +135,7 @@ export default function Home (){
             </select>   
 
             <select className="selectfont" onChange={p => handleFilterPokemonsByType(p)}>
-                <option value="sinFiltro" selected disabled hidden>Types</option>               
+                <option value="sinFiltro" selected disabled hidden>Tipos</option>               
                 {type?.map((p) => {
                         return (
                             <option key={p.id} value={p.name}>
@@ -168,7 +167,7 @@ export default function Home (){
                                     name={p.name} 
                                     image={p.image ? p.image : p.image}
                                     type={p.type}  
-                                    types={p.types}
+                                    // types={p.types}
                             />                        
                             </Link>
                     </div>
