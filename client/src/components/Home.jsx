@@ -130,8 +130,8 @@ export default function Home (){
             </select>   
             <select className="selectfont" onChange={p => handleSortHp(p)}>                
                 <option value="" selected disabled hidden>Fuerzas</option>                
-                <option value="rasd">Mayor Fuerza</option>
-                <option value="rdes">Menor Fuerza</option>
+                <option value="rasc">Menor Fuerza</option>
+                <option value="rdes">Mayor Fuerza</option>
                 {/* <option value="api">Api</option> */}
             </select>   
 

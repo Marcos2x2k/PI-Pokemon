@@ -110,11 +110,11 @@ router.get('/pokemons/:id', async (req, res, next) => {
         //const myInformation = apiHtml.map(el => axios.get(el.url)); 
         var apiHtml = await getAllPokemon();
         // ** para llamar por type 
-        const type = apiHtml.map(p => p.type)
+        const type = apiHtml.map(p => p.name)
         console.log ('TRAIGO TYPE',type )
-        const typeTotal = await type.filter(p => p.length > 0); // para verificar q no traiga nada vacio    
+        //const typeTotal = await type.filter(p => p.length > 0); // para verificar q no traiga nada vacio    
         // //hago una eliminacion de los repetidos y los ordeno antes de meter a la bd
-        const typenorepeat = [...new Set(typeTotal)].sort();
+        const typenorepeat = [...new Set(type)].sort();
         // // // recorro todo buscando y me traigo los types de la base de datos busca o lo crea si no existe
         typenorepeat.forEach(p => { 
             if (p!==undefined) Type.findOrCreate({where:{name:p}})

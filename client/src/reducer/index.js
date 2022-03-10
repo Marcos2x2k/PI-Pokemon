@@ -31,28 +31,28 @@ export default function rootReducer(state =  initialState, action){ //action.pay
                 types: action.payload
             }  
         case 'GET_HPS':
-            let sortedArrHp = action.payload === 'asc' ?
+            let sortedArrHp = action.payload === 'rasc' ?
                 state.pokemons.sort(function(a,b){
-                    if (a.name > b.name) {
+                    if (a.hp > b.hp) {
                         return 1;
                     }
-                    if (a.name < b.name) {
+                    if (a.hp < b.hp) {
                         return -1;
                     }
                     return 0;
                 }) :
                 state.pokemons.sort(function(a,b){
-                    if (a.name > b.name) {
+                    if (a.hp > b.hp) {
                         return -1;
                     }
-                    if (a.name < b.name) {
+                    if (a.hp < b.hp) {
                         return 1;
                     }
                     return 0;
                 })          
             return{
                 ...state,                
-                hps: sortedArrHp
+                hp: sortedArrHp
             } 
         case 'FILTER_POKEMONS_BY_TYPES':
             const allStatePokemons = state.pokemons
