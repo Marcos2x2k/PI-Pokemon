@@ -29,17 +29,16 @@ function Details(){
                 <Link to='/home'><button>REGRESAR AL HOME</button></Link>
                 <br /><br /><br />
 
-                <h1 class="heading">{allDetails[0].name}</h1>
-                <img className="card" src={allDetails[0].image} alt="img not found"/>
+                <h1 class="heading">{allDetails.name}</h1>
+                <img className="card" src={allDetails.image} alt="img not found"/>
                     {/* //fecha lanzamiento = released */}
-                    <h3 class="heading"> FUERZA: {allDetails[0].hp}</h3> 
-                    <h3 class="heading"> ATAQUE: {allDetails[0].attack}</h3>
-                    <h3 class="heading">DEFENSA: {allDetails[0].defense
-                        ? allDetails[0].defense
+                    <h3 class="heading"> FUERZA: {allDetails.hp}</h3> 
+                    <h3 class="heading"> ATAQUE: {allDetails.attack}</h3>
+                    <h3 class="heading">DEFENSA: {allDetails.defense
+                        ? allDetails.defense
                         : "NO POSEE DESCRIPCION"}</h3>
-                    <h3 class="heading">TIPOS: {allDetails[0].types}</h3> 
-                    <h3 class="heading"> VELOCIDAD: {allDetails[0].speed}</h3> 
-
+                    <h3 class="heading">TIPOS: {allDetails.types}</h3> 
+                    <h3 class="heading"> VELOCIDAD: {allDetails.speed}</h3> 
                     {/* ? allDetails[0].types.map((p) => p.name + ", ")
                         : allDetails[0].types.map((p) => p.name + ", ") */}
                     {/* <h3 class="heading">VELOCIDAD: {Array.isArray(allDetails[0].speed)

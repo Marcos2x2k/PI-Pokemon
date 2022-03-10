@@ -6,7 +6,7 @@ const initialState = {
     types:[],
     hps:[],
     pokemonsDetails: [],
-    pokesDelete: [],
+    pokemonsDelete: [],
 }
 
 export default function rootReducer(state =  initialState, action){ //action.payload llega las opciones del select
@@ -30,10 +30,29 @@ export default function rootReducer(state =  initialState, action){ //action.pay
                 ...state,                
                 types: action.payload
             }  
-        case 'GET_HPS':            
+        case 'GET_HPS':
+            let sortedArrHp = action.payload === 'asc' ?
+                state.pokemons.sort(function(a,b){
+                    if (a.name > b.name) {
+                        return 1;
+                    }
+                    if (a.name < b.name) {
+                        return -1;
+                    }
+                    return 0;
+                }) :
+                state.pokemons.sort(function(a,b){
+                    if (a.name > b.name) {
+                        return -1;
+                    }
+                    if (a.name < b.name) {
+                        return 1;
+                    }
+                    return 0;
+                })          
             return{
                 ...state,                
-                hps: action.payload
+                hps: sortedArrHp
             } 
         case 'FILTER_POKEMONS_BY_TYPES':
             const allStatePokemons = state.pokemons

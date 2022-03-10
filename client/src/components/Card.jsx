@@ -2,7 +2,7 @@
 import React from "react";
 import './styles/Card.css'; // importo los styles de mi Card.css
 
-export default function Card({name, image, type, types}){ 
+export default function Card({name, image, type, types,hp}){ 
     
     // var genre2= []
     // if (genre) { 
@@ -16,10 +16,10 @@ export default function Card({name, image, type, types}){
 
     
         <div>   
-            <h2 class="heading">{name}</h2>                        
+            <h1 class="heading">{name}</h1>                        
             <img  className="card" src={image} alt="img not found" width = "400px" height="270px"/>
-            <h5 class="headingRojo">TIPO: {type}</h5>
-            {/* <h5 class="headingRojo">TIPOS: {types}</h5> */}
+            <h4 class="headingRojo">TIPO: {type}</h4>
+            <h4 class="headingRojo">FUERZA: {hp}</h4>
             {/* <h5 class="headingRojo">PLATAFORMAS: {platforms
                         ? platforms.map((p) => p.name + ", ")
                         : platform.map((p) => p.name + ", ")}</h5> */}

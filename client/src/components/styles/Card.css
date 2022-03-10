@@ -1,11 +1,12 @@
 .card{
     display: flex;
-    border-radius:100px;
+    background-color: blanchedalmond;
+    border-radius:200px;
     border:5px solid #666;
     width: 25%; 
     height: 250px;
-    border-color:rgb(167, 91, 41);    
-    text-shadow: rgb(22, 21, 21);
+    border-color:rgb(190, 100, 41);    
+    text-shadow: rgb(32, 21, 21);
     flex-wrap: wrap;
     justify-content: auto;
     margin: auto; 
@@ -19,12 +20,12 @@
 }
 
 .heading {
-     color: #fbf8f8ed; 
+     color: white; 
      text-shadow: 2px 2px black;
 }
 
 .headingRojo {
     color: yellow;
-    text-shadow: 2px 2px black;
+    text-shadow: 1px 1px black;
 }
 

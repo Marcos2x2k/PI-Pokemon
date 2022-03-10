@@ -45,15 +45,7 @@ export function getTypes(){
             payload: json.data});
     };
 }
-export function getHps(){
-    return async function (dispatch){
-        var json = await axios.get("http://localhost:3001/pokemons", {});
-        // var info = await axios(`http://localhost:3001/types/${name}`); otra forma
-        return dispatch({
-            type: "GET_HPS", 
-            payload: json.data});
-    };
-}
+
 export function getListTypes(){ //(GameCreate) (HOME) Me trae los Generos
     return function(dispatch){
         axios.get('http://localhost:3001/Types')
@@ -107,6 +99,13 @@ export function orderByName(payload){
         type: 'ORDER_BY_NAME',
         payload
     }
+}
+
+export function OrderbyHp(payload){       
+    return {
+            type: "GET_HPS", 
+            payload
+    };
 }
 
 export function setPage(page){

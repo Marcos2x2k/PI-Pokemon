@@ -22,7 +22,7 @@ const App = () => {
           <Route exact path='/' element={<LandingPage/>}/>   
           <Route exact path='/Home' element={<Home/>}/> 
           <Route exact path='/pokemons/:id' element={<Details/>}/>
-          <Route path='/newPokes' element={<PokeCreate/>}/>        
+          <Route path='/newPokemons' element={<PokeCreate/>}/>        
         </Routes>   
     </div>
   //  </BrowserRouter>

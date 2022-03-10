@@ -11,13 +11,18 @@ export default function LandingPage(){
             <div className="padre">
                 <h1 className="colorLetrasBienvenido">Bienvenidos a mi PI de Pokemon</h1>
             </div>            
-            <h3 className="hijo">by Marcos Dacunda FT-19a</h3>
+            <h3 className="hijo">by Marcos Dacunda FT-19a</h3>            
             
             <Link to = '/home'>     
-            <br /><br /><br /> 
-            <img className="logo" src="https://w7.pngwing.com/pngs/93/186/png-transparent-pokemon-go-pokemon-trading-card-game-poke-ball-pikachu-trade-center-logo-sign-pokemon.png" alt="to home" />                        
-                <br /><br />
+            <div>
                 <button src='/Home'>INGRESAR</button>            
+            </div>
+            <br /><br /><br /> 
+            <div>
+                <img className="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Pokebola-pokeball-png-0.png/800px-Pokebola-pokeball-png-0.png" alt="to home" />                        
+            </div>
+                <br /><br />
+            
                 <br /><br /><br />
             </Link>
 

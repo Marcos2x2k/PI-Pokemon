@@ -1,11 +1,12 @@
 import React from 'react';
 import './styles/Home.css'; // importo los styles de mi Home.css
+import Loading from "./Loading";
 // import SearchBar from './SearchBar';
 
 //IMPORTO PORQUE USAMOS HOOKS
 import {useState, useEffect, Fragment} from 'react'; //  HOOK USAMOS useState es un hook (//)Fragment es como un div para envolver hijos div en app)
 import {useDispatch, useSelector} from 'react-redux'; 
-import {getPokemons, getListTypes, filterPokemonsByType, filterCreated, orderByName, getHps, setPage} from '../actions';//Siempre importo las acciones nuevas 
+import {getPokemons, getListTypes, filterPokemonsByType, filterCreated, orderByName, OrderbyHp, setPage} from '../actions';//Siempre importo las acciones nuevas 
 
 //LINK nos sirve para poder movernos por nuestra aplicación
 //más fácilmente en lugar de tener que cambiar la URL manualmente en el navegador.
@@ -44,7 +45,7 @@ export default function Home (){
     useEffect (()=>{
         dispatch(getPokemons());
         dispatch(getListTypes()); 
-        dispatch(getHps());                
+        dispatch(OrderbyHp());                
     },[dispatch])
 
     // ** PARA RESETEAR AL TOCAR EL BOTON volver a cargar los Juegos
@@ -61,7 +62,7 @@ export default function Home (){
     }; 
     function handleSortHp(p){
         p.preventDefault();
-        dispatch(getHps(p.target.value)) //despacho la accion
+        dispatch(OrderbyHp(p.target.value)) //despacho la accion
         setCurrentPage(1); //ordenamiento seteado en pagina 1
         setOrden(`Ordenado ${p.target.value}`)  //es un estado local vacio, lo uso para modif estado local y renderize
     }; 
@@ -128,15 +129,15 @@ export default function Home (){
                 {/* <option value="api">Api</option> */}
             </select>   
             <select className="selectfont" onChange={p => handleSortHp(p)}>                
-                <option value="" selected disabled hidden>Fuerza</option>                
-                <option value="rasd">Ascendente</option>
-                <option value="rdes">descendente</option>
+                <option value="" selected disabled hidden>Fuerzas</option>                
+                <option value="rasd">Mayor Fuerza</option>
+                <option value="rdes">Menor Fuerza</option>
                 {/* <option value="api">Api</option> */}
             </select>   
 
             <select className="selectfont" onChange={p => handleFilterPokemonsByType(p)}>
                 <option value="sinFiltro" selected disabled hidden>Tipos</option>               
-                {type?.map((p) => {
+                {types?.map((p) => {
                         return (
                             <option key={p.id} value={p.name}>
                                 {p.name}
@@ -147,7 +148,7 @@ export default function Home (){
             </select> 
             <br /><br /><br />
         </div>
-    </div>
+        </div>
             {/* aca defino las props que necesita el paginado */}
             <Paginado
                     pokemonsPerPage = {pokemonsPerPage}
@@ -155,25 +156,31 @@ export default function Home (){
                     paginado = {paginado}                    
             />             
                 {/* ACA NE TRAIGO LA CARD PARA RENDERIZAR con los datos que quiero */}
-                {currentPokemons?.map ((p) =>{  // CON ? PREGUNTA SI EXISTE Y DESPUES MAPEA
-                    return(
-                    <Fragment>                    
-                        <div>                           
-                            <Link 
+                
+                <div>
+                {currentPokemons.length > 0 ? (
+                    currentPokemons.map((p) => {
+                    return (
+                        <Link
                                 key={p.id}
                                 to={`/pokemons/${p.id}`}                            
-                            >
-                            <Card
+                                >
+                                <Card
                                     name={p.name} 
                                     image={p.image ? p.image : p.image}
-                                    type={p.type}  
-                                    // types={p.types}
-                            />                        
-                            </Link>
-                    </div>
-                    </Fragment> 
+                                    type={p.type}
+                                    hp={p.hp}  
+                                    //types={p.types}
+                                />                        
+                        </Link>
                     );
-                })}
-            </div> 
-    </div>        
-    )}
+                    })
+                    ) : (
+                    <div>
+                        <Loading/>
+                    </div>
+                    )}
+                    </div> 
+                </div> 
+    </div> )}      
+    
